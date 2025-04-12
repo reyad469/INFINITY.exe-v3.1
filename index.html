@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>INFINITY.exe</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <style>
+        body, html {
+            position: absolute;
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background: #19232d;
+            touch-action: none;
+            font-family: 'Playfair Display', serif, Arial, sans-serif;
+            color: #f2f2f2;
+        }
+        a{
+            text-decoration: none;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+        }
+        
+        /* Overlay to make content more readable */
+        .bg-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(25, 35, 45, 0.7);
+            z-index: 1;
+        }
+         
+        .content-container {
+            position: absolute;
+            z-index: 3;
+            max-width: 800px;
+            width: 95%;
+            height: 90vh;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 15px;
+            background-color: rgba(30, 40, 50, 0.85);
+            border-radius: 10px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+            overflow-y: auto;
+            border: 1px solid rgba(0, 255, 255, 0.3);
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
+        }
+  
+        .content-container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, Opera */
+        }
+  
+        .app-name {
+            font-weight: 800;
+            font-size: 2.4rem;
+            text-align: center;
+            color: #00ffff;
+            margin-bottom: 1rem;
+            letter-spacing: 1px;
+            text-shadow: 0 2px 10px rgba(0, 255, 255, 0.3);
+        }
+  
+        h1 {
+            color: #00ffff;
+            text-align: center;
+            font-weight: 600;
+            margin-top: 1rem;
+        }
+  
+        p {
+            line-height: 1.8;
+            color: #e0e0e0;
+        }
+  
+        /* Button styling */
+        button, .btn {
+            background: #263747;
+            color: white;
+            border: 1px solid #00ffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+            font-weight: 600;
+        }
+  
+        button:hover, .btn:hover {
+            background: #00ffff;
+            color: #19232d;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+            transform: translateY(-2px);
+        }
+  
+        /* Class for the enable/disable buttons */
+        .enable, .disable {
+            background-color: #263747;
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            color: white;
+            padding: 6px 12px;
+            margin: 2px;
+        }
+  
+        .enable:hover {
+            background-color: #00ffff;
+            color: #19232d;
+        }
+  
+        .disable:hover {
+            background-color: #263747;
+            border-color: #bd4b4b;
+            color: #bd4b4b;
+        }
+  
+        /* For the emulator section */
+        .emulator-header {
+            background-color: rgba(25, 35, 45, 0.7);
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            position: relative;
+        }
+  
+        .bit-selector {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+  
+        .bit-selector button {
+            border: none;
+            background-color: transparent;
+            color: white;
+            padding: 8px 15px;
+        }
+  
+        .bit-selector button.active {
+            background-color: #00ffff;
+            color: #19232d;
+        }
+  
+        /* For feature sections */
+        .feature-section {
+            border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            padding: 10px 0;
+            margin-bottom: 10px;
+        }
+  
+        .feature-name {
+            font-weight: bold;
+            color: #00ffff;
+            margin-bottom: 5px;
+        }
+  
+        .feature-description {
+            color: #a0a0a0;
+            font-size: 0.9rem;
+        }
+        
+        /* Tab styles */
+        .tabs-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+            background-color: rgba(30, 40, 50, 0.95);
+            padding: 5px 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+  
+        .tab-button {
+            flex: 1;
+            text-align: center;
+            padding: 8px 15px;
+            background-color: #263747;
+            color: white;
+            border: 1px solid #00ffff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            margin: 0 2px;
+        }
+        
+        .tab-button:first-child {
+            margin-left: 0;
+        }
+        
+        .tab-button:last-child {
+            margin-right: 0;
+        }
+        
+        .tab-button.active {
+            background-color: #00ffff;
+            color: #19232d;
+            box-shadow: 0 5px 15px rgba(0, 255, 255, 0.4);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Key binding input styles */
+        .key-input {
+            background: rgba(38, 55, 71, 0.3);
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            width: 40px;
+            height: 30px;
+            text-align: center;
+            border-radius: 8px;
+            margin-right: 8px;
+            font-family: inherit;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .key-input:focus {
+            outline: none;
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+            background: rgba(38, 55, 71, 0.95);
+            transform: translateY(-1px);
+        }
+
+        .key-input::placeholder {
+            color: rgba(0, 255, 255, 0.5);
+            font-size: 12px;
+        }
+
+        .key-label {
+            color: #00ffff;
+            font-size: 12px;
+            margin-right: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .key-binding-container {
+            display: flex;
+            align-items: center;
+            margin-right: 8px;
+        }
+
+        /* Status indicator styles */
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            margin-right: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .status-indicator::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);
+            opacity: 0.5;
+            transition: opacity 0.3s ease;
+        }
+
+        .status-indicator.enabled {
+            background: linear-gradient(135deg, #00ffff, #00cccc);
+            box-shadow: 0 0 10px rgba(0, 255, 255, 0.4),
+                        0 0 20px rgba(0, 255, 255, 0.2);
+        }
+
+        .status-indicator.disabled {
+            background: linear-gradient(135deg, #bd4b4b, #8a3636);
+            box-shadow: 0 0 10px rgba(189, 75, 75, 0.3),
+                        0 0 20px rgba(189, 75, 75, 0.15);
+        }
+
+        .status-text {
+            color: #00ffff;
+            font-size: 11px;
+            margin-left: 3px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .status-container {
+            display: flex;
+            align-items: center;
+            margin-right: 8px;
+            padding: 2px 6px;
+            background: rgba(38, 55, 71, 0.3);
+            border-radius: 15px;
+            border: 1px solid #00ffff;
+            transition: all 0.3s ease;
+        }
+
+        .status-container:hover {
+            background: rgba(38, 55, 71, 0.5);
+            border-color: rgba(0, 255, 255, 0.2);
+        }
+
+        /* Add animation for status change */
+        @keyframes statusPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+
+        @keyframes statusGlow {
+            0% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2); }
+            50% { box-shadow: 0 0 15px rgba(0, 255, 255, 0.6), 0 0 25px rgba(0, 255, 255, 0.3); }
+            100% { box-shadow: 0 0 10px rgba(0, 255, 255, 0.4), 0 0 20px rgba(0, 255, 255, 0.2); }
+        }
+
+        .status-indicator.changing {
+            animation: statusPulse 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .status-indicator.enabled {
+            animation: statusGlow 2s infinite;
+        }
+
+        .status-indicator.disabled {
+            animation: none;
+        }
+
+        /* Add hover effect for status container */
+        .status-container:hover .status-indicator::before {
+            opacity: 0.8;
+        }
+
+        .status-container:hover .status-text {
+            text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+        }
+
+        /* Remove color customization styles */
+        .color-customizer, .color-button, .color-popup, .color-wheel, .color-selector {
+            display: none !important;
+        }
+
+        .enable.active {
+            background-color: #00ffff !important;
+            color: #19232d !important;
+            box-shadow: 0 0 15px #00ffff !important;
+        }
+
+        /* Color picker styles */
+        .color-picker-container {
+            position: relative;
+            display: inline-block;
+        }
+
+        .color-square {
+            width: 35px;
+            height: 35px;
+            background: #00ffff;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .color-square:hover {
+            transform: scale(1.1);
+        }
+
+        .color-picker {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 45px;
+            background: #1e2832;
+            border: 1px solid #00ffff;
+            padding: 15px;
+            border-radius: 8px;
+            z-index: 1000;
+            width: 200px;
+        }
+
+        .color-picker.show {
+            display: block;
+        }
+
+        .preset-colors {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .preset-color {
+            width: 35px;
+            height: 35px;
+            border-radius: 4px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .preset-color:hover {
+            transform: scale(1.1);
+        }
+
+        .color-input {
+            width: 100%;
+            background: #263747;
+            border: 1px solid #00ffff;
+            color: #00ffff;
+            padding: 8px;
+            border-radius: 4px;
+            text-align: center;
+            font-family: monospace;
+            text-transform: uppercase;
+        }
+
+        .color-input:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(0, 255, 255, 0.3);
+        }
+
+        /* Mobile Responsive Color Picker */
+        @media screen and (max-width: 768px) {
+            .color-picker {
+                position: fixed;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: 90%;
+                max-width: 300px;
+                background: rgba(30, 40, 50, 0.95);
+                border: 2px solid #00ffff;
+                box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+                z-index: 2000;
+            }
+
+            .preset-colors {
+                gap: 10px;
+                margin-bottom: 20px;
+            }
+
+            .preset-color {
+                width: 40px;
+                height: 40px;
+            }
+
+            .color-input {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media screen and (max-width: 480px) {
+            .color-picker {
+                width: 85%;
+                padding: 12px;
+            }
+
+            .preset-color {
+                width: 35px;
+                height: 35px;
+            }
+
+            .preset-colors {
+                gap: 8px;
+            }
+        }
+
+        /* Mobile Responsive Styles */
+        @media screen and (max-width: 768px) {
+            .content-container {
+                width: 100%;
+                height: 100vh;
+                padding: 10px;
+                border-radius: 0;
+                top: 0;
+                left: 0;
+                transform: none;
+                overflow-y: auto;
+            }
+
+            .app-name {
+                font-size: 1.8rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .tabs-container {
+                flex-direction: column;
+                padding: 3px 5px;
+                margin-bottom: 10px;
+            }
+
+            .tab-button {
+                width: 100%;
+                margin: 2px 0;
+                padding: 8px 10px;
+            }
+
+            .feature-section {
+                display: flex;
+                flex-direction: column;
+                padding: 8px 0;
+                margin-bottom: 8px;
+            }
+
+            .feature-section > div {
+                width: 100%;
+                margin-bottom: 4px;
+            }
+
+            .feature-name {
+                font-size: 0.9rem;
+                margin-bottom: 2px;
+            }
+
+            .feature-description {
+                font-size: 0.8rem;
+                margin-bottom: 4px;
+            }
+
+            .key-binding-container {
+                margin-right: 4px;
+                margin-bottom: 4px;
+            }
+
+            .key-input {
+                width: 35px;
+                height: 25px;
+                font-size: 12px;
+                margin-right: 4px;
+            }
+
+            .key-label {
+                font-size: 10px;
+                margin-right: 2px;
+            }
+
+            .status-container {
+                padding: 2px 4px;
+                margin-right: 4px;
+                margin-bottom: 4px;
+            }
+
+            .status-text {
+                font-size: 9px;
+                margin-left: 2px;
+            }
+
+            .enable, .disable {
+                padding: 6px 12px;
+                font-size: 0.8rem;
+                margin: 2px 0;
+                width: 100%;
+                text-align: center;
+            }
+
+            .emulator-header {
+                padding: 8px;
+                margin-bottom: 8px;
+            }
+
+            .bit-selector {
+                position: static;
+                display: flex;
+                justify-content: center;
+                margin-top: 8px;
+            }
+
+            .bit-selector button {
+                padding: 4px 8px;
+                font-size: 0.8rem;
+                margin: 0 4px;
+            }
+
+            /* Ensure color picker is visible */
+            .color-picker {
+                width: 100%;
+                max-width: 200px;
+                right: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .preset-colors {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 5px;
+            }
+
+            .preset-color {
+                width: 30px;
+                height: 30px;
+            }
+
+            .color-square {
+                width: 30px;
+                height: 30px;
+            }
+
+            /* Improve touch targets */
+            button, .btn, .enable, .disable, .key-input {
+                min-height: 36px;
+            }
+
+            /* Adjust status indicator size */
+            .status-indicator {
+                width: 6px;
+                height: 6px;
+            }
+        }
+
+        /* Small mobile devices */
+        @media screen and (max-width: 480px) {
+            .content-container {
+                padding: 8px;
+            }
+
+            .app-name {
+                font-size: 1.5rem;
+                margin-bottom: 0.6rem;
+            }
+
+            .feature-section {
+                padding: 6px 0;
+                margin-bottom: 6px;
+            }
+
+            .feature-section > div {
+                margin-bottom: 3px;
+            }
+
+            .key-binding-container {
+                margin-bottom: 3px;
+            }
+
+            .status-container {
+                margin-bottom: 3px;
+            }
+
+            .enable, .disable {
+                margin: 1px 0;
+            }
+        }
+
+        /* Landscape mode adjustments */
+        @media screen and (max-height: 500px) and (orientation: landscape) {
+            .content-container {
+                height: 100vh;
+                overflow-y: auto;
+            }
+
+            .feature-section {
+                padding: 4px 0;
+                margin-bottom: 4px;
+            }
+
+            .app-name {
+                font-size: 1.5rem;
+                margin-bottom: 0.4rem;
+            }
+
+            .tabs-container {
+                margin-bottom: 8px;
+                padding: 2px 4px;
+            }
+        }
+    </style>
+  </head>
+  <body>
+    <!-- Particle.js container -->
+    <div id="particles-js"></div>
+    
+    <!-- Overlay to improve contrast -->
+    <div class="bg-overlay"></div>
+    
+    <!-- Content container where you can add your elements -->
+    <div class="content-container">
+      <div class="emulator-header">
+        <div class="bit-selector float-end">
+          <button class="bit-32 active">32bit</button>
+          <button class="bit-64">64bit</button>
+        </div>
+        <h1 class="app-name">INFINITY.exe</h1>
+      </div>
+      
+      <!-- New Tab navigation -->
+      <div class="tabs-container">
+        <button class="tab-button active" data-tab="external">AIMBOT</button>
+        <button class="tab-button" data-tab="sniper">SNIPER FUNCTION</button>
+        <button class="tab-button" data-tab="visual">VISUAL</button>
+        <button class="tab-button" data-tab="extra">EXTRA</button>
+        <button class="tab-button" data-tab="misc">MISC</button>
+      </div>
+      
+      <!-- External Tab Content -->
+      <div id="external" class="tab-content active">
+        
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AIMBOT PRO</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AIMBOT DRAG</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AIMBOT DRAG V12</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AIMBOT HEAD</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AIMBODY</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AIMBOOT NICK</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AWM SCOP</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Visual Tab Content -->
+      <div id="visual" class="tab-content">
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">CHAMAS MENU</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+        
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">CHAMAS BLUE</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">MOCO GREEN</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">GLOWALL 3D</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AWM LOCATION</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AWM-Y LOCATION</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">M82B LOCATION</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">M24 LOCATION</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">SNIPER AMMO LOCATION</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Misc Tab Content -->
+      <div id="misc" class="tab-content">
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">STREAMER MODE</div>
+              <div class="feature-description">Hide from Screenshare</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">RESET GUEST</div>
+              <div class="feature-description">Reset Guest Account if Ban</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <button class="btn" style="background: #263747; color: #00ffff; border: 1px solid #00ffff; padding: 8px 25px; font-weight: bold;">Reset</button>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">PANEL COLOR</div>
+              <div class="feature-description">Change The Panel Color</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="color-picker-container">
+                <div class="color-square"></div>
+                <div class="color-picker">
+                  <div class="preset-colors">
+                    <div class="preset-color" style="background: #00ffff" data-color="#00ffff"></div>
+                    <div class="preset-color" style="background: #ff0000" data-color="#ff0000"></div>
+                    <div class="preset-color" style="background: #00ff00" data-color="#00ff00"></div>
+                    <div class="preset-color" style="background: #0000ff" data-color="#0000ff"></div>
+                    <div class="preset-color" style="background: #ffff00" data-color="#ffff00"></div>
+                    <div class="preset-color" style="background: #ff00ff" data-color="#ff00ff"></div>
+                    <div class="preset-color" style="background: #00ffff" data-color="#00ffff"></div>
+                    <div class="preset-color" style="background: #ffffff" data-color="#ffffff"></div>
+                  </div>
+                  <input type="text" class="color-input" value="#00FFFF" maxlength="7">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sniper Function Tab Content -->
+      <div id="sniper" class="tab-content">
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">SNIPER AIMBOT</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">SNIPER NO RECOIL</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">SNIPER QUICK SCOPE</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AWM SWITCH</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AWM-Y SWITCH</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">M82B SWITCH</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">M24 SWITCH</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra Tab Content -->
+      <div id="extra" class="tab-content">
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">AUTO HEADSHOT</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">MAGIC</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">GOST MOD</div>
+              <div class="feature-description">Apply at Training</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">BYPASS EMULATOR</div>
+              <div class="feature-description">Apply One Time In Login</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">FAST LANDING</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">CAMERA LEFT</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">SPEED HACK</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="feature-section">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <div class="feature-name">GLITCH FIRE</div>
+              <div class="feature-description">Apply at Each Match</div>
+            </div>
+            <div class="d-flex align-items-center">
+              <div class="key-binding-container">
+                <span class="key-label">Key:</span>
+                <input type="text" class="key-input" maxlength="1" placeholder="...">
+              </div>
+              <div class="status-container">
+                <div class="status-indicator disabled"></div>
+                <span class="status-text">Disabled</span>
+              </div>
+              <a href="" class="enable">Enable</a>
+              <a href="" class="disable">Disable</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <script>
+      "use strict";
+
+      // Initialize particles.js
+      particlesJS('particles-js', {
+        particles: {
+          number: {
+            value: 150,
+            density: {
+              enable: true,
+              value_area: 800
+            }
+          },
+          color: {
+            value: '#00ffff'
+          },
+          shape: {
+            type: 'circle',
+            stroke: {
+              width: 1,
+              color: '#00ffff'
+            },
+            polygon: {
+              nb_sides: 6
+            }
+          },
+          opacity: {
+            value: 0.6,
+            random: false,
+            anim: {
+              enable: true,
+              speed: 1,
+              opacity_min: 0.4,
+              sync: false
+            }
+          },
+          size: {
+            value: 4,
+            random: true,
+            anim: {
+              enable: true,
+              speed: 2,
+              size_min: 2,
+              sync: false
+            }
+          },
+          line_linked: {
+            enable: true,
+            distance: 150,
+            color: '#00ffff',
+            opacity: 0.5,
+            width: 1.5
+          },
+          move: {
+            enable: true,
+            speed: 2,
+            direction: 'none',
+            random: false,
+            straight: false,
+            out_mode: 'bounce',
+            bounce: true,
+            attract: {
+              enable: true,
+              rotateX: 2000,
+              rotateY: 2000
+            }
+          }
+        },
+        interactivity: {
+          detect_on: 'canvas',
+          events: {
+            onhover: {
+              enable: true,
+              mode: ['grab', 'bubble']
+            },
+            onclick: {
+              enable: true,
+              mode: 'push'
+            },
+            resize: true
+          },
+          modes: {
+            grab: {
+              distance: 200,
+              line_linked: {
+                opacity: 0.8
+              }
+            },
+            bubble: {
+              distance: 200,
+              size: 6,
+              duration: 2,
+              opacity: 0.8,
+              speed: 3
+            },
+            push: {
+              particles_nb: 4
+            }
+          }
+        },
+        retina_detect: true
+      });
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            // Remove active class and background color from all tabs
+            tabButtons.forEach(btn => {
+              btn.classList.remove('active');
+              btn.style.removeProperty('background-color');
+            });
+            tabContents.forEach(content => content.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            button.classList.add('active');
+            // Set background color for active tab
+            const currentColor = getComputedStyle(document.documentElement).getPropertyValue('--accent-color') || '#00ffff';
+            button.style.backgroundColor = currentColor;
+            
+            const tabId = button.getAttribute('data-tab');
+            document.getElementById(tabId).classList.add('active');
+          });
+        });
+
+        const bitButtons = document.querySelectorAll('.bit-selector button');
+        bitButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            bitButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+          });
+        });
+
+        // Function to update status
+        function updateStatus(featureSection, isEnabled) {
+          const statusIndicator = featureSection.querySelector('.status-indicator');
+          const statusText = featureSection.querySelector('.status-text');
+          
+          statusIndicator.classList.add('changing');
+          
+          setTimeout(() => {
+            statusIndicator.classList.remove('changing');
+            if (isEnabled) {
+              statusIndicator.classList.remove('disabled');
+              statusIndicator.classList.add('enabled');
+              statusText.textContent = 'Enabled';
+            } else {
+              statusIndicator.classList.remove('enabled');
+              statusIndicator.classList.add('disabled');
+              statusText.textContent = 'Disabled';
+            }
+          }, 300);
+        }
+
+        // Handle key input
+        const keyInputs = document.querySelectorAll('.key-input');
+        keyInputs.forEach(input => {
+          input.addEventListener('keydown', (e) => {
+            e.preventDefault();
+            input.value = e.key.toUpperCase();
+          });
+
+          input.addEventListener('focus', () => {
+            input.value = '';
+          });
+        });
+
+        // Handle key press for features
+        document.addEventListener('keydown', (e) => {
+          const key = e.key.toUpperCase();
+          keyInputs.forEach(input => {
+            if (input.value === key) {
+              const parentSection = input.closest('.feature-section');
+              const enableBtn = parentSection.querySelector('.enable');
+              const disableBtn = parentSection.querySelector('.disable');
+              
+              if (enableBtn.classList.contains('active')) {
+                enableBtn.classList.remove('active');
+                disableBtn.classList.add('active');
+                updateStatus(parentSection, false);
+              } else {
+                enableBtn.classList.add('active');
+                disableBtn.classList.remove('active');
+                updateStatus(parentSection, true);
+              }
+            }
+          });
+        });
+
+        // Handle enable/disable buttons
+        const featureButtons = document.querySelectorAll('.enable, .disable');
+        featureButtons.forEach(button => {
+          button.addEventListener('click', () => {
+            const parentSection = button.closest('.feature-section');
+            const enableBtn = parentSection.querySelector('.enable');
+            const disableBtn = parentSection.querySelector('.disable');
+            
+            if (button.classList.contains('enable')) {
+              enableBtn.classList.add('active');
+              disableBtn.classList.remove('active');
+              updateStatus(parentSection, true);
+            } else {
+              enableBtn.classList.remove('active');
+              disableBtn.classList.add('active');
+              updateStatus(parentSection, false);
+            }
+          });
+        });
+
+        // Color Picker Functionality
+        const colorSquare = document.querySelector('.color-square');
+        const colorPicker = document.querySelector('.color-picker');
+        const colorInput = document.querySelector('.color-input');
+        const presetColors = document.querySelectorAll('.preset-color');
+
+        // Toggle color picker
+        colorSquare.addEventListener('click', (e) => {
+            e.stopPropagation();
+            colorPicker.classList.toggle('show');
+        });
+
+        // Close picker when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!colorPicker.contains(e.target) && !colorSquare.contains(e.target)) {
+                colorPicker.classList.remove('show');
+            }
+        });
+
+        // Handle preset color clicks
+        presetColors.forEach(preset => {
+            preset.addEventListener('click', () => {
+                const color = preset.dataset.color;
+                updateColors(color);
+            });
+        });
+
+        // Handle manual color input
+        colorInput.addEventListener('input', (e) => {
+            let color = e.target.value;
+            if (!color.startsWith('#')) {
+                color = '#' + color;
+            }
+            if (/^#[0-9A-Fa-f]{6}$/.test(color)) {
+                updateColors(color);
+            }
+        });
+
+        function updateColors(newColor) {
+            // Update CSS variables first
+            document.documentElement.style.setProperty('--accent-color', newColor);
+
+            // Update the color square and input
+            colorSquare.style.backgroundColor = newColor;
+            colorInput.value = newColor.toUpperCase();
+
+            // Update all text colors
+            document.querySelectorAll('.app-name, .feature-name, .key-label, .status-text, .color-input').forEach(element => {
+                element.style.color = newColor;
+            });
+
+            // Update all borders
+            document.querySelectorAll('.tab-button, .enable, .disable, .btn, .key-input, .status-container, .color-picker').forEach(element => {
+                element.style.borderColor = newColor;
+            });
+
+            // Update active elements
+            document.querySelectorAll('.tab-button.active, .bit-selector button.active, .enable.active').forEach(element => {
+                element.style.backgroundColor = newColor;
+            });
+
+            // Update status indicators
+            document.querySelectorAll('.status-indicator.enabled').forEach(indicator => {
+                indicator.style.background = `linear-gradient(135deg, ${newColor}, ${adjustColor(newColor, -20)})`;
+                indicator.style.boxShadow = `0 0 10px ${newColor}40, 0 0 20px ${newColor}20`;
+            });
+
+            // Update particles
+            if (window.pJSDom && window.pJSDom[0]) {
+                const pJS = window.pJSDom[0].pJS;
+                pJS.particles.color.value = newColor;
+                pJS.particles.line_linked.color = newColor;
+                pJS.particles.shape.stroke.color = newColor;
+                pJS.fn.particlesRefresh();
+            }
+
+            // Update hover effects
+            updateStylesheet(newColor);
+        }
+
+        // Helper function to adjust color brightness
+        function adjustColor(color, amount) {
+            const hex = color.replace('#', '');
+            const r = Math.max(0, Math.min(255, parseInt(hex.substring(0, 2), 16) + amount));
+            const g = Math.max(0, Math.min(255, parseInt(hex.substring(2, 4), 16) + amount));
+            const b = Math.max(0, Math.min(255, parseInt(hex.substring(4, 6), 16) + amount));
+            return '#' + ((1 << 24) + (r << 16) + (g << 8) + b).toString(16).slice(1).toUpperCase();
+        }
+
+        // Update stylesheet with new color
+        function updateStylesheet(newColor) {
+            let styleSheet = document.querySelector('#dynamic-styles');
+            if (!styleSheet) {
+                styleSheet = document.createElement('style');
+                styleSheet.id = 'dynamic-styles';
+                document.head.appendChild(styleSheet);
+            }
+
+            const styles = `
+                button:hover, .btn:hover {
+                    background: ${newColor} !important;
+                    box-shadow: 0 5px 15px ${newColor}66 !important;
+                }
+                .enable:hover {
+                    background-color: ${newColor} !important;
+                }
+                .key-input:focus {
+                    box-shadow: 0 0 10px ${newColor}80 !important;
+                }
+                .status-container:hover .status-text {
+                    text-shadow: 0 0 10px ${newColor}80 !important;
+                }
+                .tab-button.active {
+                    background-color: ${newColor} !important;
+                    box-shadow: 0 5px 15px ${newColor}66 !important;
+                }
+                .bit-selector button.active {
+                    background-color: ${newColor} !important;
+                    color: #19232d !important;
+                }
+                .color-square {
+                    background-color: ${newColor} !important;
+                }
+                .color-picker {
+                    border-color: ${newColor} !important;
+                }
+                .color-input {
+                    border-color: ${newColor} !important;
+                    color: ${newColor} !important;
+                }
+                .status-indicator.enabled {
+                    background: linear-gradient(135deg, ${newColor}, ${adjustColor(newColor, -20)}) !important;
+                    box-shadow: 0 0 10px ${newColor}40, 0 0 20px ${newColor}20 !important;
+                }
+            `;
+
+            styleSheet.textContent = styles;
+        }
+      });
+    </script>
+  </body>
+</html>
