@@ -320,7 +320,6 @@
             padding: 2px 6px;
             background: rgba(38, 55, 71, 0.3);
             border-radius: 15px;
-            border: 1px solid #00ffff;
             transition: all 0.3s ease;
         }
 
@@ -501,7 +500,7 @@
             .content-container {
                 width: 100%;
                 height: 100vh;
-                padding: 10px;
+                padding: 5px;
                 border-radius: 0;
                 top: 0;
                 left: 0;
@@ -510,164 +509,226 @@
             }
 
             .app-name {
-                font-size: 1.8rem;
-                margin-bottom: 0.8rem;
+                font-size: 1.6rem;
+                margin-bottom: 8px;
+                padding: 5px;
             }
 
             .tabs-container {
-                flex-direction: column;
-                padding: 3px 5px;
-                margin-bottom: 10px;
+                display: flex;
+                flex-wrap: nowrap;
+                overflow-x: auto;
+                overflow-y: hidden;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                margin: 0 -5px 10px;
+                padding: 5px;
+                background: rgba(25, 35, 45, 0.8);
+                border-top: 1px solid rgba(0, 255, 255, 0.2);
+                border-bottom: 1px solid rgba(0, 255, 255, 0.2);
+            }
+
+            .tabs-container::-webkit-scrollbar {
+                display: none;
             }
 
             .tab-button {
-                width: 100%;
-                margin: 2px 0;
-                padding: 8px 10px;
+                flex: 0 0 auto;
+                padding: 8px 15px;
+                margin: 0 3px;
+                font-size: 0.85rem;
+                white-space: nowrap;
+                background: rgba(38, 55, 71, 0.3);
+                border: 1px solid #00ffff;
+                color: #00ffff;
+                transition: all 0.3s ease;
+            }
+
+            .tab-button:first-child {
+                margin-left: 5px;
+            }
+
+            .tab-button:last-child {
+                margin-right: 5px;
+            }
+
+            .tab-button.active {
+                background: #00ffff;
+                color: #19232d;
+                box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
             }
 
             .feature-section {
                 display: flex;
                 flex-direction: column;
-                padding: 8px 0;
-                margin-bottom: 8px;
+                padding: 4px 0;
+                margin-bottom: 4px;
+                border-bottom: 1px solid rgba(0, 255, 255, 0.2);
             }
 
             .feature-section > div {
                 width: 100%;
-                margin-bottom: 4px;
+                margin-bottom: 2px;
+            }
+
+            .feature-section > div:first-child {
+                width: 100%;
+                margin-right: 0;
+            }
+
+            .feature-section > div:last-child {
+                width: 100%;
+                display: flex;
+                align-items: center;
+                gap: 4px;
             }
 
             .feature-name {
                 font-size: 0.9rem;
-                margin-bottom: 2px;
+                margin-bottom: 1px;
+                color: #00ffff;
             }
 
             .feature-description {
                 font-size: 0.8rem;
-                margin-bottom: 4px;
+                margin-bottom: 2px;
+                color: rgba(255, 255, 255, 0.7);
             }
 
             .key-binding-container {
-                margin-right: 4px;
-                margin-bottom: 4px;
+                display: flex;
+                align-items: center;
+            }
+
+            .key-label {
+                display: none;
             }
 
             .key-input {
                 width: 35px;
-                height: 25px;
-                font-size: 12px;
-                margin-right: 4px;
+                height: 28px;
+                font-size: 0.8rem;
+                background: rgba(38, 55, 71, 0.3);
+                border: 1px solid #00ffff;
+                color: #00ffff;
+                text-align: center;
+                border-radius: 4px;
+                margin-right: 8px;
             }
 
-            .key-label {
-                font-size: 10px;
-                margin-right: 2px;
+            .key-input::placeholder {
+                content: "Key";
+                color: rgba(0, 255, 255, 0.5);
+                font-size: 0.7rem;
             }
 
             .status-container {
-                padding: 2px 4px;
+                display: flex;
+                align-items: center;
+                padding: 2px 6px;
                 margin-right: 4px;
-                margin-bottom: 4px;
+                background: rgba(38, 55, 71, 0.3);
+                border-radius: 15px;
             }
 
             .status-text {
-                font-size: 9px;
-                margin-left: 2px;
+                display: none;
+            }
+
+            .status-indicator {
+                position: relative;
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                margin: 0;
+            }
+
+            .status-indicator::before {
+                content: '✕';
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                font-size: 12px;
+                color: #bd4b4b;
+            }
+
+            .status-indicator.enabled::before {
+                content: '✓';
+                color: #00ffff;
+            }
+
+            .status-indicator.disabled::before {
+                content: '✕';
+                color: #bd4b4b;
             }
 
             .enable, .disable {
-                padding: 6px 12px;
-                font-size: 0.8rem;
-                margin: 2px 0;
-                width: 100%;
+                padding: 4px 10px;
+                font-size: 0.75rem;
+                margin: 0 2px;
+                min-width: 40px;
                 text-align: center;
+                background: rgba(38, 55, 71, 0.3);
+                border: 1px solid #00ffff;
+                border-radius: 4px;
+                color: #00ffff;
             }
 
-            .emulator-header {
-                padding: 8px;
-                margin-bottom: 8px;
+            .enable.active {
+                background: #00ffff;
+                color: #19232d;
             }
 
-            .bit-selector {
-                position: static;
-                display: flex;
-                justify-content: center;
-                margin-top: 8px;
-            }
-
-            .bit-selector button {
-                padding: 4px 8px;
-                font-size: 0.8rem;
-                margin: 0 4px;
-            }
-
-            /* Ensure color picker is visible */
-            .color-picker {
-                width: 100%;
-                max-width: 200px;
-                right: 0;
-                left: 50%;
-                transform: translateX(-50%);
-            }
-
-            .preset-colors {
-                grid-template-columns: repeat(4, 1fr);
-                gap: 5px;
-            }
-
-            .preset-color {
-                width: 30px;
-                height: 30px;
-            }
-
-            .color-square {
-                width: 30px;
-                height: 30px;
-            }
-
-            /* Improve touch targets */
-            button, .btn, .enable, .disable, .key-input {
-                min-height: 36px;
-            }
-
-            /* Adjust status indicator size */
-            .status-indicator {
-                width: 6px;
-                height: 6px;
+            .disable.active {
+                background: rgba(189, 75, 75, 0.3);
+                border-color: #bd4b4b;
+                color: #bd4b4b;
             }
         }
 
         /* Small mobile devices */
         @media screen and (max-width: 480px) {
             .content-container {
-                padding: 8px;
+                padding: 3px;
             }
 
             .app-name {
-                font-size: 1.5rem;
-                margin-bottom: 0.6rem;
+                font-size: 1.4rem;
+                margin-bottom: 6px;
+                text-align: left;
+            }
+
+            .tabs-container {
+                margin: 0 -3px 8px;
+                padding: 4px;
+            }
+
+            .tab-button {
+                padding: 6px 12px;
+                margin: 0 2px;
+                font-size: 0.8rem;
             }
 
             .feature-section {
-                padding: 6px 0;
-                margin-bottom: 6px;
-            }
-
-            .feature-section > div {
+                padding: 3px 0;
                 margin-bottom: 3px;
             }
 
-            .key-binding-container {
-                margin-bottom: 3px;
+            .key-input {
+                width: 30px;
+                height: 26px;
+                font-size: 0.75rem;
             }
 
-            .status-container {
-                margin-bottom: 3px;
+            .key-input::placeholder {
+                font-size: 0.65rem;
             }
 
             .enable, .disable {
-                margin: 1px 0;
+                padding: 3px 10px;
+                min-width: 35px;
             }
         }
 
@@ -678,19 +739,19 @@
                 overflow-y: auto;
             }
 
-            .feature-section {
-                padding: 4px 0;
-                margin-bottom: 4px;
-            }
-
             .app-name {
-                font-size: 1.5rem;
-                margin-bottom: 0.4rem;
+                font-size: 1.3rem;
+                margin-bottom: 5px;
+                text-align: left;
             }
 
             .tabs-container {
-                margin-bottom: 8px;
-                padding: 2px 4px;
+                margin-bottom: 5px;
+            }
+
+            .tab-button {
+                padding: 5px 10px;
+                font-size: 0.75rem;
             }
         }
     </style>
@@ -732,15 +793,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -753,15 +814,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -774,15 +835,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -795,15 +856,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -816,15 +877,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -837,15 +898,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -858,15 +919,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -882,15 +943,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -903,15 +964,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -923,15 +984,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -944,15 +1005,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -965,15 +1026,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -986,15 +1047,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1007,15 +1068,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1028,15 +1089,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1049,15 +1110,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1073,15 +1134,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1138,15 +1199,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1159,15 +1220,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1180,15 +1241,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1201,15 +1262,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1222,15 +1283,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1243,15 +1304,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1264,15 +1325,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1288,15 +1349,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1309,15 +1370,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1330,15 +1391,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1351,15 +1412,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1372,15 +1433,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1393,15 +1454,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1414,15 +1475,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1435,15 +1496,15 @@
             </div>
             <div class="d-flex align-items-center">
               <div class="key-binding-container">
-                <span class="key-label">Key:</span>
-                <input type="text" class="key-input" maxlength="1" placeholder="...">
+                 
+                <input type="text" class="key-input" maxlength="1" placeholder="Key">
               </div>
               <div class="status-container">
                 <div class="status-indicator disabled"></div>
-                <span class="status-text">Disabled</span>
+                <span class="status-text">DISABLED</span>
               </div>
-              <a href="" class="enable">Enable</a>
-              <a href="" class="disable">Disable</a>
+              <a href="" class="enable">On</a>
+              <a href="" class="disable">Off</a>
             </div>
           </div>
         </div>
@@ -1597,11 +1658,15 @@
             if (isEnabled) {
               statusIndicator.classList.remove('disabled');
               statusIndicator.classList.add('enabled');
-              statusText.textContent = 'Enabled';
+              if (window.innerWidth > 768) {
+                statusText.textContent = 'ACTIVE';
+              }
             } else {
               statusIndicator.classList.remove('enabled');
               statusIndicator.classList.add('disabled');
-              statusText.textContent = 'Disabled';
+              if (window.innerWidth > 768) {
+                statusText.textContent = 'DISABLED';
+              }
             }
           }, 300);
         }
@@ -1616,6 +1681,13 @@
 
           input.addEventListener('focus', () => {
             input.value = '';
+            input.placeholder = 'Key';
+          });
+
+          input.addEventListener('blur', () => {
+            if (!input.value) {
+              input.placeholder = 'Key';
+            }
           });
         });
 
